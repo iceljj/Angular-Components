@@ -1,0 +1,37 @@
+<!-- 测试区域 -->
+<div class="test-area" #testArea>
+  🔍 右键点击这里测试菜单
+</div>
+
+<!-- 主菜单 -->
+<div class="context-menu" #mainMenu>
+  <ul class="menu">
+    <li *ngFor="let item of currentMenuItems; let i = index"
+        [class.menu-item]="true"
+        [class.separator]="isSeparator(item)"
+        (mouseenter)="onItemEnter(i, $event, item)"
+        (mouseleave)="onItemLeave(i, item)"
+        (click)="onItemClick(item)">
+      <div class="menu-item-content">
+        <span *ngIf="item.icon" class="menu-icon" [class]="item.icon"></span>
+        <span class="menu-label">{{item.label}}</span>
+        <span *ngIf="hasChildren(item)" class="submenu-arrow">▶</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- 子菜单 -->
+<div class="context-menu" #subMenu>
+  <ul class="menu">
+    <li *ngFor="let item of currentSubMenuItems || []"
+        [class.menu-item]="true"
+        [class.separator]="isSeparator(item)"
+        (click)="onItemClick(item)">
+      <div class="menu-item-content">
+        <span *ngIf="item.icon" class="menu-icon" [class]="item.icon"></span>
+        <span class="menu-label">{{item.label}}</span>
+      </div>
+    </li>
+  </ul>
+</div>

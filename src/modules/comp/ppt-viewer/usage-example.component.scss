@@ -1,0 +1,57 @@
+.usage-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: #555;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+h3 {
+  color: #666;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.code-example {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+pre {
+  background-color: #2d2d2d;
+  color: #f8f8f2;
+  padding: 15px;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+code {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+}
+
+app-ppt-viewer-demo {
+  display: block;
+  margin-top: 20px;
+  height: 70vh;
+  min-height: 500px;
+}

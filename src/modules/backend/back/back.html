@@ -1,0 +1,176 @@
+<!-- 左侧导航 -->
+<div class="sidebar">
+  <div class="logo-area">
+    <iconify-icon icon="ion:menu-outline" style="font-size: 28px; color: white;"></iconify-icon>
+    <div class="text-xl font-bold mt-2">管理控制台</div>
+  </div>
+  
+  <div class="menu-item" [class.active]="activeMenuItem === '控制台'" (click)="setActiveMenu('控制台')">
+    <div class="icon">
+      <iconify-icon icon="mdi:view-dashboard"></iconify-icon>
+    </div>
+    <div class="text">控制台</div>
+  </div>
+  
+  <div class="menu-item" [class.active]="activeMenuItem === '用户管理'" (click)="setActiveMenu('用户管理')">
+    <div class="icon">
+      <iconify-icon icon="mdi:account-group"></iconify-icon>
+    </div>
+    <div class="text">用户管理</div>
+  </div>
+  
+  <div class="menu-item" [class.active]="activeMenuItem === '产品管理'" (click)="setActiveMenu('产品管理')">
+    <div class="icon">
+      <iconify-icon icon="mdi:package"></iconify-icon>
+    </div>
+    <div class="text">产品管理</div>
+  </div>
+  
+  <div class="menu-item" [class.active]="activeMenuItem === '订单管理'" (click)="setActiveMenu('订单管理')">
+    <div class="icon">
+      <iconify-icon icon="mdi:cart"></iconify-icon>
+    </div>
+    <div class="text">订单管理</div>
+  </div>
+  
+  <div class="menu-item" [class.active]="activeMenuItem === '财务管理'" (click)="setActiveMenu('财务管理')">
+    <div class="icon">
+      <iconify-icon icon="mdi:finance"></iconify-icon>
+    </div>
+    <div class="text">财务管理</div>
+  </div>
+  
+  <div class="menu-item" [class.active]="activeMenuItem === '数据统计'" (click)="setActiveMenu('数据统计')">
+    <div class="icon">
+      <iconify-icon icon="mdi:chart-bar"></iconify-icon>
+    </div>
+    <div class="text">数据统计</div>
+  </div>
+  
+  <div class="menu-item" [class.active]="activeMenuItem === '系统设置'" (click)="setActiveMenu('系统设置')">
+    <div class="icon">
+      <iconify-icon icon="mdi:cog"></iconify-icon>
+    </div>
+    <div class="text">系统设置</div>
+  </div>
+</div>
+
+<!-- 主内容区 -->
+<div class="flex-1 flex flex-col">
+  <!-- 顶部栏 -->
+  <header class="topbar">
+    <div class="breadcrumb">
+      <span class="text-blue-500">首页</span>
+      <span class="mx-1">/</span>
+      <span>控制台</span>
+    </div>
+    
+    <div class="user-area">
+      <div class="notification-badge">
+        <iconify-icon icon="mdi:bell-outline"></iconify-icon>
+        <div class="badge-dot"></div>
+      </div>
+      
+      <div class="user-profile">
+        <img src="https://modao.cc/ai/uploads/ai_pics/24/248115/aigp_1757674053.jpeg" alt="Admin profile picture" class="user-avatar">
+        <span class="user-name">张经理</span>
+      </div>
+    </div>
+  </header>
+  
+  <div class="flex">
+    <!-- 主面板 -->
+    <div class="main-content">
+      <h2 class="section-title">
+        <iconify-icon icon="carbon:analytics"></iconify-icon>
+        数据概览
+      </h2>
+      
+      <!-- 统计指标卡片 -->
+      <div class="grid grid-cols-4 gap-6 mb-8">
+        <!-- 指标卡片 -->
+        <div class="card metric-card" *ngFor="let metric of metrics; index as i">
+          <div class="card-content">
+            <div class="metric-title">{{ metric.title }}</div>
+            <div class="metric-value">{{ metric.value }}</div>
+            <div class="metric-trend" [style.color]="metric.trend.direction === 'down' ? '#f5222d' : '#52c41a'">
+              <iconify-icon [icon]="metric.trend.direction === 'up' ? 'carbon:caret-up' : 'carbon:caret-down'"></iconify-icon>
+              {{ metric.trend.value }} {{ metric.trend.period }}
+            </div>
+          </div>
+          <div class="chart-container" #chartContainer1 *ngIf="i === 0"></div>
+          <div class="chart-container" #chartContainer2 *ngIf="i === 1"></div>
+          <div class="chart-container" #chartContainer3 *ngIf="i === 2"></div>
+          <div class="chart-container" #chartContainer4 *ngIf="i === 3"></div>
+        </div>
+      </div>
+      
+      <!-- 快捷入口 -->
+      <h2 class="section-title">
+        <iconify-icon icon="mdi:rocket-outline"></iconify-icon>
+        常用功能
+      </h2>
+      
+      <div class="grid grid-cols-6 gap-4 mb-8">
+        <div class="quick-entry" *ngFor="let entry of quickEntries">
+          <div class="entry-icon">
+            <iconify-icon [icon]="entry.icon"></iconify-icon>
+          </div>
+          <div class="entry-name">{{ entry.name }}</div>
+        </div>
+      </div>
+      
+      <!-- 最近操作记录 -->
+      <h2 class="section-title">
+        <iconify-icon icon="mdi:history"></iconify-icon>
+        最近操作记录
+      </h2>
+      
+      <div class="card">
+        <div class="card-content">
+          <div class="timeline-item" *ngFor="let activity of recentActivities">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-title">{{ activity.title }}</div>
+              <div class="timeline-time">{{ activity.time }}</div>
+              <div class="timeline-desc">{{ activity.description }}</div>
+              <div class="success-badge" *ngIf="activity.status === 'success'">成功</div>
+              <div class="warning-badge" *ngIf="activity.status === 'warning'">待审核</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 右侧边栏 -->
+    <div class="right-sidebar">
+      <!-- 系统公告 -->
+      <div class="card">
+        <div class="card-header">系统公告</div>
+        <div class="card-content">
+          <div class="list-item" *ngFor="let announcement of announcements">
+            <div class="notice-tag" [ngStyle]="announcement.tagStyle">{{ announcement.tag }}</div>
+            <div>
+              <div class="font-medium mb-2">{{ announcement.title }}</div>
+              <div class="text-gray-500 text-sm">{{ announcement.content }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 待办事项 -->
+      <div class="card">
+        <div class="card-header">我的待办</div>
+        <div class="card-content">
+          <div class="flex items-center justify-between py-3" [ngClass]="{ 'border-b border-gray-100': i < todos.length - 1 }" *ngFor="let todo of todos; index as i">
+            <div class="flex items-center">
+              <input type="checkbox" class="mr-3" [checked]="todo.checked" (change)="toggleTodo(i)">
+              <div>{{ todo.text }}</div>
+            </div>
+            <div class="text-xs" [ngClass]="{ 'text-red-500': todo.dueDate === '紧急' }">{{ todo.dueDate }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

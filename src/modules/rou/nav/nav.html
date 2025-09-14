@@ -1,0 +1,43 @@
+<nav [class.collapsed]="collapsed" class="sidebar">
+  <!-- 顶部Logo区域 -->
+  <div class="sidebar-header">
+    <div class="logo-container">
+      <span class="logo-text" *ngIf="!collapsed">Admin System</span>
+    </div>
+  </div>
+
+  <!-- 导航菜单 -->
+  <div class="menu-items">
+    <div *ngFor="let item of menuItems" class="menu-section">
+      <!-- 没有子菜单的顶级菜单 -->
+      <div *ngIf="!item.children" class="menu-item" [class.active]="activeRoute === item.route"
+           (click)="navigate(item.route)">
+        <span *ngIf="!collapsed">{{ item.title }}</span>
+      </div>
+
+      <!-- 有子菜单的顶级菜单 -->
+      <div *ngIf="item.children" class="menu-group">
+        <div class="group-header">
+          <div class="group-title">
+            <span *ngIf="!collapsed">{{ item.title }}</span>
+          </div>
+        </div>
+
+        <!-- 子菜单项 -->
+        <div class="submenu" *ngIf="!collapsed">
+          <div *ngFor="let child of item.children" class="submenu-item"
+               [class.active]="activeRoute === child.route"
+               (click)="navigate(child.route)">
+            <span>{{ child.title }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 折叠按钮 -->
+  <div class="collapse-btn" (click)="onToggleCollapse()">
+    <span *ngIf="!collapsed">折叠菜单</span>
+  </div>
+</nav>
+

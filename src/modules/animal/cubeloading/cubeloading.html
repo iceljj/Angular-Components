@@ -1,0 +1,25 @@
+<div class="cube-loader-container">
+  <!-- 加载文本 -->
+  <div class="loading-text" *ngIf="showText">
+    加载中，请稍候{{dots}}
+  </div>
+
+  <!-- 立方体容器 -->
+  <div class="cube-container" [style.width.px]="size" [style.height.px]="size">
+    <div class="cube">
+      <div class="cube-face cube-face-front" [style.background]="colors[0]">1</div>
+      <div class="cube-face cube-face-back" [style.background]="colors[1]">2</div>
+      <div class="cube-face cube-face-right" [style.background]="colors[2]">3</div>
+      <div class="cube-face cube-face-left" [style.background]="colors[3]">4</div>
+      <div class="cube-face cube-face-top" [style.background]="colors[4]">5</div>
+      <div class="cube-face cube-face-bottom" [style.background]="colors[5]">6</div>
+    </div>
+  </div>
+
+  <!-- 控制按钮 -->
+  <div class="controls" *ngIf="showControls">
+    <button (click)="speedUp()">加速旋转</button>
+    <button (click)="togglePlay()">{{isPlaying ? '暂停' : '继续'}}</button>
+    <button (click)="speedDown()">减速旋转</button>
+  </div>
+</div>

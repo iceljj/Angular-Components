@@ -1,0 +1,64 @@
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  backface-visibility: hidden;
+
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    background: #000;
+  }
+
+  .control-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .play-button {
+    width: 5rem;
+    height: 5rem;
+    background-color: transparent;
+    border: 0;
+    display: flex;
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    //&:active {
+    //  transform: scale(0.92);
+    //  background: rgba(255, 255, 255, 0.3);
+    //}
+
+    span {
+      display: flex; /* 关键修复：使span也成为flex容器 */
+      align-items: center; /* 子元素垂直居中 */
+      justify-content: center; /* 子元素水平居中 */
+      color: white;
+      font-size: 2.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      width: 100%; /* 确保占满父容器 */
+      height: 100%; /* 确保占满父容器 */
+    }
+
+    ion-icon {
+      display: block; /* 消除图标默认的内联间隙 */
+      margin: 0 auto; /* 水平居中 */
+    }
+  }
+}

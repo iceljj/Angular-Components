@@ -1,0 +1,60 @@
+<!--&lt;!&ndash; parent.component.html &ndash;&gt;-->
+<!--<div class="parent-container">-->
+<!--  <h1>弹出框组件演示</h1>-->
+
+<!--  &lt;!&ndash; 打开模态框的按钮 &ndash;&gt;-->
+<!--  <button-->
+<!--    class="open-modal-btn"-->
+<!--    (click)="openModal()">-->
+<!--    打开弹出框-->
+<!--  </button>-->
+
+<!--  &lt;!&ndash; 弹出框组件 &ndash;&gt;-->
+<!--  <app-comp-modol-->
+<!--    [isOpen]="showModal"-->
+<!--    [backgroundType]="'mask'"-->
+<!--    (closed)="showModal = false">-->
+
+<!--    <h2 class="modal-title">重要通知</h2>-->
+<!--    <div class="modal-body">-->
+<!--      <p>这里是弹出框的自定义内容区域</p>-->
+<!--      <button-->
+<!--        class="action-btn"-->
+<!--        (click)="handleAction()">-->
+<!--        确认操作-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </app-comp-modol>-->
+<!--</div>-->
+
+<!--<comp-drop-down-toggle-->
+<!--  [dataArray]="yourDataArray"-->
+<!--  (selectionChange)="handleSelectionChange($event)">-->
+<!--</comp-drop-down-toggle>-->
+
+<!-- 基础文本 -->
+<!--<app-popover-->
+<!--  content="删除后数据不可恢复"-->
+<!--  width="250"-->
+<!--  placement="top"-->
+<!--&gt;</app-popover>-->
+
+<!--&lt;!&ndash; 自定义模板 &ndash;&gt;-->
+<!--<ng-template #customTpl let-user>-->
+<!--  <div class="custom-pop">-->
+<!--&lt;!&ndash;    <nz-avatar [nzSrc]="user.avatar"></nz-avatar>&ndash;&gt;-->
+<!--    <span>{{ user.name }}</span>-->
+<!--  </div>-->
+<!--</ng-template>-->
+
+<!--<app-popover-->
+<!--  [content]="customTpl"-->
+<!--  [context]="{ avatar: '/assets/jack.png', name: 'Jack Ma' }"-->
+<!--  overlayClass="custom-popover-style"-->
+<!--  placement="rightTop"-->
+<!--&gt;</app-popover>-->
+
+
+<!--<app-waterfall [cards]="cards"></app-waterfall>-->
+
+<app-videogular></app-videogular>

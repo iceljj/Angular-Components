@@ -1,0 +1,53 @@
+<div class="container">
+  <h1 [class.day-text]="isDayMode">{{ isDayMode ? 'Good Morning' : 'Good Night' }}</h1>
+  <p [class.day-text]="isDayMode">
+    {{ isDayMode ? 'Enjoy the beautiful sunrise' : 'Click the moon to see the sunrise' }}
+  </p>
+
+  <div class="sky">
+    <div class="stars">
+      <div class="star" *ngFor="let star of stars"
+           [style.left]="star.x + '%'"
+           [style.top]="star.y + '%'"
+           [style.animation]="'twinkle ' + star.duration + 's infinite ' + star.delay + 's'">
+      </div>
+      <div class="shooting-star" [class.animate]="!isDayMode"></div>
+    </div>
+
+    <div class="moon" (click)="toggleDayMode()" [class.day-mode]="isDayMode">
+      <div class="moon-crater"></div>
+      <div class="moon-crater small"></div>
+      <div class="moon-crater large"></div>
+    </div>
+
+    <div class="clouds">
+      <div class="cloud" *ngFor="let cloud of clouds"
+           [style.left]="cloud.x + 'px'"
+           [style.top]="cloud.y + 'px'"
+           [style.width]="cloud.size + 'px'"
+           [style.height]="cloud.size/2 + 'px'"
+           [style.animation]="'float ' + cloud.speed + 's infinite linear'">
+      </div>
+    </div>
+
+    <div class="sun" [class.visible]="isDayMode">
+      <div class="sun-rays"></div>
+    </div>
+
+    <div class="mountains">
+      <div class="mountain" *ngFor="let mountain of mountains"
+           [style.left]="mountain.x + 'px'"
+           [style.width]="mountain.width + 'px'"
+           [style.height]="mountain.height + 'px'"
+           [style.background]="mountain.color">
+      </div>
+    </div>
+
+    <div class="ground"></div>
+  </div>
+
+  <div class="credits">
+    <p>Designed with ❤️ using Angular</p>
+    <p>Animation inspired by nature</p>
+  </div>
+</div>

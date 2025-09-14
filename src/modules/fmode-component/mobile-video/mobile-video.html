@@ -1,0 +1,19 @@
+<div class="video-container" (click)="onVideoClick()">
+  <video
+    #videoElement
+    [src]="videoUrl"
+    playsinline
+    (ended)="pauseVideo()"
+  ></video>
+
+  <div *ngIf="showPlayButton" class="control-overlay">
+    <button class="play-button" (click)="$event.stopPropagation(); togglePlay()">
+      <span *ngIf="!isPlaying" class="icon-play">
+        <ion-icon name="play"></ion-icon>
+      </span>
+      <span *ngIf="isPlaying" class="icon-pause">
+        <ion-icon name="pause"></ion-icon>
+      </span>
+    </button>
+  </div>
+</div>

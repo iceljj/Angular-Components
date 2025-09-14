@@ -1,0 +1,27 @@
+<!-- 瀑布流容器 -->
+<div class="waterfall-container">
+  <!-- 每列容器 -->
+  <div
+    *ngFor="let column of organizedColumns; let i = index"
+    class="column"
+    [style]="'--column-index: ' + i"
+  >
+    <!-- 列内卡片 -->
+    <div
+      *ngFor="let card of column"
+      class="card"
+      [ngClass]="getCardClass(card)"
+    >
+      <!-- 卡片图片 -->
+      <div class="card-image" *ngIf="card.image">
+        <img [src]="card.image" [alt]="card.title">
+      </div>
+
+      <!-- 卡片内容 -->
+      <div class="card-content">
+        <h3 class="card-title">{{ card.title }}</h3>
+        <p class="card-text">{{ card.content }}</p>
+      </div>
+    </div>
+  </div>
+</div>

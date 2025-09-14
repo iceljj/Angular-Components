@@ -1,0 +1,217 @@
+<div class="markdown-editor-wrapper" [class.dark-theme]="isDarkTheme">
+  <div class="markdown-editor" [ngClass]="getThemeClass()" [class.dark-theme]="isDarkTheme">
+    <!-- 工具栏 -->
+    <div class="toolbar">
+      <div class="toolbar-group">
+        <!-- 格式化工具 -->
+        <button
+          *ngFor="let action of toolbarActions"
+          class="toolbar-btn"
+          [title]="action.name + (action.shortcut ? ' (' + action.shortcut + ')' : '')"
+          (click)="action.action()">
+          <span [innerHTML]="action.icon"></span>
+          <span class="btn-text">{{ action.name }}</span>
+        </button>
+      </div>
+
+      <div class="toolbar-group">
+        <!-- 文件操作 -->
+        <button class="toolbar-btn" title="打开文件 (Ctrl+O)" (click)="openFile()">
+          📁
+          <span class="btn-text">打开</span>
+        </button>
+        <button class="toolbar-btn" title="保存 Markdown (Ctrl+S)" (click)="saveMarkdown()">
+          💾
+          <span class="btn-text">保存</span>
+        </button>
+        <button class="toolbar-btn" title="导出 HTML" (click)="exportHtml()">
+          🌐
+          <span class="btn-text">导出</span>
+        </button>
+      </div>
+
+      <div class="toolbar-group">
+        <!-- 视图控制 -->
+        <button class="toolbar-btn" [class.active]="isDarkTheme" title="切换主题" (click)="toggleTheme()">
+          🌙
+          <span class="btn-text">主题</span>
+        </button>
+        
+        <!-- 代码高亮主题选择器 -->
+        <div class="theme-selector-wrapper">
+          <button class="toolbar-btn theme-selector-btn" 
+                  title="全局代码高亮主题: {{getCurrentCodeThemeName()}}"
+                  (click)="toggleThemeSelector()">
+            🎨
+            <span class="btn-text">{{getCurrentCodeThemeName()}}</span>
+            <span class="dropdown-arrow" [class.open]="isThemeSelectorOpen">▼</span>
+          </button>
+          
+          <!-- 主题选择下拉菜单 -->
+          <div class="theme-dropdown" [class.show]="isThemeSelectorOpen">
+            <div class="theme-dropdown-header">
+              <span>🎨 全局代码配色主题</span>
+              <button class="close-btn" (click)="closeThemeSelector()">✕</button>
+            </div>
+            <div class="theme-options">
+              <button 
+                *ngFor="let theme of [                
+                  { value: 'github', name: 'GitHub', category: 'light' },
+                  { value: 'vs2015', name: 'VS Code Dark', category: 'dark' },
+                  { value: 'monokai', name: 'Monokai', category: 'dark' },
+                  { value: 'solarized-dark', name: 'Solarized Dark', category: 'dark' },
+                  { value: 'solarized-light', name: 'Solarized Light', category: 'light' },
+                  { value: 'atom-one-dark', name: 'Atom One Dark', category: 'dark' },
+                  { value: 'atom-one-light', name: 'Atom One Light', category: 'light' },
+                  { value: 'dracula', name: 'Dracula', category: 'dark' },
+                  { value: 'nord', name: 'Nord', category: 'dark' },
+                  { value: 'tomorrow-night', name: 'Tomorrow Night', category: 'dark' }
+                ]" 
+                class="theme-option"
+                [class.selected]="theme.value === currentCodeTheme"
+                (click)="selectGlobalTheme(theme.value)"
+                [title]="theme.name + ' (' + theme.category + ')'">
+                <span class="theme-preview" [attr.data-theme]="theme.value"></span>
+                <span class="theme-name">{{theme.name}}</span>
+                <span class="theme-category" [class.dark]="theme.category === 'dark'">{{theme.category}}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <button class="toolbar-btn" [class.active]="isNotionMode" title="Notion式编辑" (click)="toggleNotionMode()">
+          ✍️
+          <span class="btn-text">Notion</span>
+        </button>
+        <button class="toolbar-btn" [class.active]="isFullscreen" title="全屏模式 (F11)" (click)="toggleFullscreen()">
+          ⛶
+          <span class="btn-text">全屏</span>
+        </button>
+        <button class="toolbar-btn" [class.active]="isPreviewMode" title="切换预览模式" (click)="togglePreviewMode()">
+          👁️
+          <span class="btn-text">预览</span>
+        </button>
+        <button class="toolbar-btn" [class.active]="scrollSyncEnabled" title="同步滚动" (click)="toggleScrollSync()">
+          🔄
+          <span class="btn-text">同步</span>
+        </button>
+      </div>
+
+      <div class="toolbar-group">
+        <!-- 字体大小控制 -->
+        <button class="toolbar-btn" title="减小字体 (Ctrl+-)" (click)="decreaseFontSize()">
+          🔍-
+          <span class="btn-text">缩小</span>
+        </button>
+        <button class="toolbar-btn" title="重置字体大小 (Ctrl+0)" (click)="resetFontSize()">
+          🔄
+          <span class="btn-text">重置</span>
+        </button>
+        <button class="toolbar-btn" title="增大字体 (Ctrl+=)" (click)="increaseFontSize()">
+          🔍+
+          <span class="btn-text">放大</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 编辑器主体 -->
+    <div class="editor-container" [class.notion-mode]="isNotionMode">
+      <!-- 传统编辑区域 -->
+      <div class="editor-panel" [class.hidden]="isPreviewMode || isNotionMode">
+        <textarea
+          #editor
+          class="editor-textarea"
+          [(ngModel)]="markdownContent"
+          (input)="onContentChange()"
+          (compositionupdate)="onContentChange()"
+          (compositionend)="onContentChange()"
+          placeholder="开始编写您的 Markdown 文档...
+
+🎯 快捷键提示：
+• Ctrl+B: 粗体
+• Ctrl+I: 斜体
+• Ctrl+S: 保存
+• Ctrl+O: 打开文件
+• F11: 全屏模式
+
+📸 支持拖拽图片上传！
+📊 支持 Mermaid 图表渲染">
+        </textarea>
+
+        <!-- 文件输入（隐藏） -->
+        <input
+          #fileInput
+          type="file"
+          accept=".md,.markdown,image/*"
+          (change)="onFileSelected($event)"
+          style="display: none;">
+      </div>
+
+      <!-- Notion式实时编辑区域 -->
+      <div class="notion-editor" [class.hidden]="!isNotionMode">
+        <div
+          #notionEditor
+          class="notion-content"
+          contenteditable="true"
+          (input)="onNotionContentChange($event)"
+          (keydown)="onNotionKeydown($event)"
+          (paste)="onNotionPaste($event)"
+          [innerHTML]="notionHtml"
+          placeholder="输入 '/' 显示命令菜单，或直接输入 Markdown 语法...">
+        </div>
+      </div>
+
+      <!-- 预览区域 -->
+      <div class="preview-panel" [class.full-width]="isPreviewMode" [class.hidden]="isNotionMode">
+        <div
+          #preview
+          class="preview-content"
+          [innerHTML]="renderedHtml">
+        </div>
+      </div>
+    </div>
+
+    <!-- 状态栏 -->
+    <div class="status-bar">
+      <div class="status-left">
+        <span class="status-item">📝 Markdown 编辑器</span>
+        <span class="status-item">{{ isDarkTheme ? '🌙 深色' : '☀️ 浅色' }}</span>
+      </div>
+
+      <div class="status-right">
+        <span class="status-item">{{ markdownContent.split('\n').length }} 行</span>
+        <span class="status-item">{{ markdownContent.length }} 字符</span>
+        <span class="status-item">{{ getWordCount() }} 词</span>
+      </div>
+    </div>
+
+    <!-- 快捷键帮助（悬浮） -->
+    <div class="help-overlay" [class.show]="false">
+      <div class="help-content">
+        <h3>🚀 快捷键</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-item">
+            <kbd>Ctrl</kbd> + <kbd>B</kbd>
+            <span>粗体</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>Ctrl</kbd> + <kbd>I</kbd>
+            <span>斜体</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>Ctrl</kbd> + <kbd>S</kbd>
+            <span>保存</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>Ctrl</kbd> + <kbd>O</kbd>
+            <span>打开</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>F11</kbd>
+            <span>全屏</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
