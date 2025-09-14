@@ -12,8 +12,16 @@
         var hash = window.location.hash;
         var search = window.location.search;
         
-        // 构造重定向URL，保持原始路径信息
-        var redirectUrl = '/' + (path.split('/').slice(2).join('/') || '') + search + hash;
+        // 移除仓库名称前缀（Angular-Components），保留实际的Angular路由
+        var basePath = '/Angular-Components';
+        var redirectPath = path;
+        
+        if (path.startsWith(basePath)) {
+          redirectPath = path.substring(basePath.length) || '/';
+        }
+        
+        // 构造完整的重定向URL
+        var redirectUrl = redirectPath + search + hash;
         
         // 使用 sessionStorage 保存重定向信息
         sessionStorage.setItem('redirected', 'true');

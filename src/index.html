@@ -19,10 +19,16 @@
         if (redirectPath) {
           sessionStorage.removeItem('redirectPath');
           // 使用 replaceState 来更新 URL 而不添加到浏览器历史记录
-          history.replaceState(null, null, redirectPath);
+          // 确保路径以 baseHref 开头
+          var basePath = '/Angular-Components';
+          var finalPath = redirectPath;
+          if (!redirectPath.startsWith(basePath)) {
+            finalPath = basePath + (redirectPath.startsWith('/') ? redirectPath : '/' + redirectPath);
+          }
+          history.replaceState(null, null, finalPath);
         } else {
           // 使用 replaceState 来更新 URL 而不添加到浏览器历史记录
-          history.replaceState(null, null, '/');
+          history.replaceState(null, null, '/Angular-Components/');
         }
       }
     })();

@@ -37,7 +37,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/comp/md',
+    redirectTo: '/comp/list',
     pathMatch: 'full',
   },
 ];
