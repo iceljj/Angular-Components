@@ -21,10 +21,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install cnpm
+        run: npm install -g cnpm --registry=https://registry.npmmirror.com
+
+      - name: Install dependencies and generate lock file
+        run: |
+          cnpm install
+          # 生成 package-lock.json 用于缓存
+          npm install --package-lock-only --registry=https://registry.npmmirror.com
 
       - name: Build project
         run: npm run build:prod
