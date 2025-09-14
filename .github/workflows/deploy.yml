@@ -38,7 +38,7 @@ jobs:
           npm install --legacy-peer-deps
           
       - name: Build project
-        run: ng build --configuration=github-pages
+        run: npx ng build --configuration=github-pages
         env:
           NODE_OPTIONS: --max-old-space-size=4096
 
