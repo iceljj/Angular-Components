@@ -36,6 +36,16 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
+## GitHub Pages Deployment
+
+To deploy the application to GitHub Pages, the project is configured with a GitHub Actions workflow.
+
+The deployment will automatically occur when changes are pushed to the `master` branch.
+
+You can also manually trigger the deployment workflow from the GitHub Actions tab.
+
+After deployment, the application will be available at: https://iceljj.github.io/Angular-Components/
+
 ## Running unit tests
 
 To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
