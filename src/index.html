@@ -12,11 +12,20 @@
   <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
   <script>
     // 检查是否是从 404 重定向过来的
-    if (sessionStorage.getItem('redirected')) {
-      sessionStorage.removeItem('redirected');
-      // 使用 replaceState 来更新 URL 而不添加到浏览器历史记录
-      history.replaceState(null, null, '/');
-    }
+    (function() {
+      if (sessionStorage.getItem('redirected')) {
+        sessionStorage.removeItem('redirected');
+        var redirectPath = sessionStorage.getItem('redirectPath');
+        if (redirectPath) {
+          sessionStorage.removeItem('redirectPath');
+          // 使用 replaceState 来更新 URL 而不添加到浏览器历史记录
+          history.replaceState(null, null, redirectPath);
+        } else {
+          // 使用 replaceState 来更新 URL 而不添加到浏览器历史记录
+          history.replaceState(null, null, '/');
+        }
+      }
+    })();
   </script>
 </head>
 <body>

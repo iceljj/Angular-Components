@@ -21,18 +21,6 @@ const routes: Routes = [
     loadComponent: () => import('./comp-btn/comp-btn').then((m) => m.CompBtn),
   },
   {
-    path: 'upload',
-    loadComponent: () => import('./comp-upload/comp-upload').then((m) => m.CompUpload),
-  },
-  {
-    path: 'list',
-    loadComponent: () => import('./comp-list/comp-list').then((m) => m.CompList),
-  },
-  {
-    path: 'btn',
-    loadComponent: () => import('./comp-btn/comp-btn').then((m) => m.CompBtn),
-  },
-  {
     path: 'menu',
     loadComponent: () => import('./comp-menu/comp-menu').then((m) => m.CompMenu),
   },

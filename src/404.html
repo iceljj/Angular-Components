@@ -6,8 +6,22 @@
     <script>
       // GitHub Pages 会将 404 页面用于所有未找到的路由
       // 我们需要将用户重定向回 index.html，让 Angular 路由处理
-      sessionStorage.setItem('redirected', 'true');
-      window.location.replace('/');
+      (function() {
+        // 保存当前路径
+        var path = window.location.pathname;
+        var hash = window.location.hash;
+        var search = window.location.search;
+        
+        // 构造重定向URL，保持原始路径信息
+        var redirectUrl = '/' + (path.split('/').slice(2).join('/') || '') + search + hash;
+        
+        // 使用 sessionStorage 保存重定向信息
+        sessionStorage.setItem('redirected', 'true');
+        sessionStorage.setItem('redirectPath', redirectUrl);
+        
+        // 重定向到根目录
+        window.location.replace('/');
+      })();
     </script>
     <meta http-equiv="refresh" content="0;URL='/'">
   </head>
