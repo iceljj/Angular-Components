@@ -1,0 +1,1 @@
+import{Wb as t,Xb as s,sb as o,vc as m}from"./chunk-SV3L42UN.js";import"./chunk-IJBWTILK.js";var c=class i{static \u0275fac=function(e){return new(e||i)};static \u0275cmp=o({type:i,selectors:[["app-mobile-music"]],decls:2,vars:0,template:function(e,l){e&1&&(t(0,"p"),m(1,"mobile-music works!"),s())},encapsulation:2})};export{c as MobileMusic};
