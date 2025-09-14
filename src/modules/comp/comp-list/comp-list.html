@@ -1,0 +1,34 @@
+<div class="container">
+  <!-- 按钮工具栏 -->
+  <div class="toolbar">
+    <button class="btn" (click)="addCard()">➕ 增加卡片</button>
+    <button class="btn" (click)="removeCard()">➖ 减少卡片</button>
+    <button class="btn" (click)="increaseGap()">⬆️ 增大间距</button>
+    <button class="btn" (click)="decreaseGap()">⬇️ 缩小间距</button>
+
+    <div class="col-control">
+      每行：
+      <select [(ngModel)]="cols" (change)="setManualCols(cols)">
+        <option value="2">2列</option>
+        <option value="3">3列</option>
+        <option value="4">4列</option>
+        <option value="5">5列</option>
+      </select>
+    </div>
+
+    <button class="btn btn-reset" (click)="resetToAuto()" *ngIf="isManualMode">🔄 自动列数</button>
+  </div>
+
+  <!-- 可滚动的卡片区域 -->
+  <div class="scroll-container">
+    <div class="card-grid"
+         [@listAnimation]
+         [style.gap.px]="gapSize"
+         [style.grid-template-columns]="getGridTemplate()">
+      <div class="card" *ngFor="let card of cards" [@cardState]>
+        <h3>卡片 {{ card }}</h3>
+        <p>这是一个响应式布局的美化卡片内容。</p>
+      </div>
+    </div>
+  </div>
+</div>

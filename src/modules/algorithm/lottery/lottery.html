@@ -1,0 +1,92 @@
+<!-- lottery.component.html -->
+<div class="lottery-container">
+  <!-- 顶部统计区域 -->
+  <div class="header">
+    <h1 class="title">💎 钻石抽奖系统 💎</h1>
+    <div class="stats">
+      <div class="stat-card">
+        <span class="stat-label">总钻石数</span>
+        <span class="stat-value">{{ totalDiamondsConfig | number }}</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">参与人数</span>
+        <span class="stat-value">{{ participants.length | number }}</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">中奖人数</span>
+        <span class="stat-value">{{ winners.length | number }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 控制面板 -->
+  <div class="control-panel">
+    <div class="config-card">
+      <h2>抽奖配置</h2>
+
+      <!-- 总钻石数配置 -->
+      <div class="config-group">
+        <label>总钻石数量</label>
+        <input type="number" [(ngModel)]="totalDiamondsConfig" min="1"
+               (change)="autoAdjustGrades()">
+        <span class="hint">当前实际钻石: {{currentTotalDiamonds | number}}</span>
+      </div>
+
+      <!-- 钻石档次设置 -->
+      <div class="config-group">
+        <label>钻石档次设置</label>
+        <div class="grade" *ngFor="let grade of diamondGrades; let i = index">
+          <span>档次 {{ i + 1 }}：</span>
+          <input type="number" [(ngModel)]="grade.diamonds" min="1"
+                 placeholder="钻石数量" (change)="autoAdjustGrades()">
+          <input type="number" [(ngModel)]="grade.winners" min="1"
+                 placeholder="中奖人数">
+          <button (click)="removeGrade(i)" class="btn-remove">×</button>
+        </div>
+        <button (click)="addGrade()" class="btn-add">+ 添加档次</button>
+      </div>
+
+      <!-- 参与人数设置 -->
+      <div class="config-group">
+        <label>参与人数</label>
+        <input type="number" [(ngModel)]="totalParticipants" min="1" max="100000">
+      </div>
+
+      <!-- 操作按钮 -->
+      <div class="action-buttons">
+        <button (click)="generateParticipants()" class="btn-generate">生成参与者</button>
+        <button (click)="runLottery()" class="btn-lottery">开始抽奖</button>
+        <button (click)="reset()" class="btn-reset">重置</button>
+      </div>
+    </div>
+
+    <!-- 可视化区域 -->
+    <div class="visualization">
+      <div class="diamond-animation">
+        <div *ngFor="let diamond of animatedDiamonds" class="diamond"
+             [style.left]="diamond.x + '%'"
+             [style.top]="diamond.y + '%'"
+             [style.animation-delay]="diamond.delay + 's'">
+          💎
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 中奖结果区域 -->
+  <div class="results-section">
+    <h2>中奖结果</h2>
+    <div class="results-header">
+      <span>参与者ID</span>
+      <span>中奖档次</span>
+      <span>获得钻石</span>
+    </div>
+    <div class="results-container">
+      <div *ngFor="let winner of winners" class="winner-card">
+        <span class="participant-id">#{{ winner.id }}</span>
+        <span class="grade">档次 {{ winner.grade }}</span>
+        <span class="diamonds">{{ winner.diamonds }} 💎</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "indent": [
+      "error",
+      2
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "no-trailing-spaces": [
+      "error"
+    ],
+    "eol-last": [
+      "error",
+      "always"
+    ],
+    "no-multiple-empty-lines": [
+      "error"
+    ]
+  }
+}

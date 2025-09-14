@@ -1,0 +1,249 @@
+/* address-management.component.scss */
+ion-app {
+  --ion-background-color: #f5f7fa;
+  --ion-font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  letter-spacing: 0.5px;
+}
+
+.content-area {
+  height: 85vh;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+}
+
+.address-list {
+  background: transparent;
+  padding: 0;
+}
+
+.address-card {
+  --inner-padding-end: 0;
+  --padding-start: 0;
+  --background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  margin-bottom: 20px;
+  padding: 16px;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+
+  &:active {
+    transform: translateY(-2px);
+  }
+
+  &.default {
+    border-left: 4px solid var(--ion-color-primary);
+  }
+}
+
+.address-info {
+  flex: 1;
+  padding-right: 12px;
+}
+
+.recipient-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+
+  .name {
+    font-weight: 600;
+    font-size: 16px;
+    color: #1a1a1a;
+    margin-right: 12px;
+  }
+
+  .phone {
+    font-size: 14px;
+    color: #666;
+    margin-right: 12px;
+  }
+
+  .default-tag {
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+}
+
+.full-address {
+  font-size: 14px;
+  color: #4d4d4d;
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  ion-button {
+    --padding-start: 8px;
+    --padding-end: 8px;
+    --padding-top: 4px;
+    --padding-bottom: 4px;
+    height: auto;
+
+    ion-icon {
+      font-size: 20px;
+    }
+  }
+
+  .edit-btn {
+    --color: #666;
+  }
+
+  .delete-btn {
+    --color: #ff4d4f;
+  }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  text-align: center;
+
+  .empty-icon {
+    font-size: 64px;
+    color: #d9d9d9;
+    margin-bottom: 16px;
+  }
+
+  p {
+    font-size: 16px;
+    color: #999;
+    margin-top: 8px;
+  }
+}
+
+.add-button {
+  --border-radius: 0;
+  --background: linear-gradient(135deg, #4e54c8, #8f94fb);
+  --background-activated: linear-gradient(135deg, #4348a5, #7a7fe0);
+  --background-focused: linear-gradient(135deg, #4348a5, #7a7fe0);
+  --background-hover: linear-gradient(135deg, #4348a5, #7a7fe0);
+  --box-shadow: 0 4px 16px rgba(78, 84, 200, 0.3);
+  font-weight: 500;
+  text-transform: none;
+  margin: 0 16px 8px;
+  height: 48px;
+}
+
+.custom-modal {
+  --height: 95vh;
+  align-items: flex-end;
+
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .modal-title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .form-content {
+    --height: 85vh;
+    --padding-top: 0;
+    --padding-bottom: 0;
+    --padding-start: 16px;
+    --padding-end: 16px;
+  }
+
+  .address-form {
+    padding-top: 8px;
+
+    ion-item {
+      --background: transparent;
+      --border-color: #f0f0f0;
+      --border-radius: 12px;
+      --padding-start: 16px;
+      --padding-end: 16px;
+      margin-bottom: 16px;
+
+      ion-label {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 8px;
+      }
+
+      ion-input, ion-textarea, ion-select {
+        --background: #fafafa;
+        --padding-start: 12px;
+        --padding-end: 12px;
+        --padding-top: 10px;
+        --padding-bottom: 10px;
+        border-radius: 10px;
+        font-size: 16px;
+      }
+    }
+
+    .form-row {
+      display: flex;
+      gap: 12px;
+
+      .form-group {
+        flex: 1;
+        margin-bottom: 16px;
+      }
+    }
+
+    .picker-button {
+      --padding-start: 0;
+      --padding-end: 0;
+      --padding-top: 10px;
+      --padding-bottom: 10px;
+      width: 100%;
+      justify-content: space-between;
+
+      .placeholder {
+        color: #999;
+      }
+
+      ion-icon {
+        margin-inline-start: 8px;
+        color: #999;
+      }
+    }
+  }
+
+  .save-btn {
+    --background: #4e54c8;
+    --background-activated: #4348a5;
+    --background-focused: #4348a5;
+    --background-hover: #4348a5;
+    --border-radius: 0;
+    font-weight: 500;
+    height: 50px;
+    text-transform: none;
+    margin: 0 0 8px;
+  }
+}
+
+/* Picker样式 */
+ion-picker {
+  height: 250px;
+}
+
+ion-picker-column {
+  background: #fff;
+}
+
+ion-picker-column-option {
+  font-size: 16px;
+  color: #333;
+}

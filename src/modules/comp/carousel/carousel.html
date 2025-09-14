@@ -1,0 +1,36 @@
+<div class="carousel-container"
+     (touchstart)="onTouchStart($event)"
+     (touchmove)="onTouchMove($event)"
+     (touchend)="onTouchEnd()">
+
+  <div #carouselTrack class="carousel-track">
+    <div class="carousel-slide" *ngFor="let image of images; let i = index">
+      <img [src]="image" alt="Slide {{i + 1}}" class="slide-image">
+      <div class="slide-overlay">
+        <h3 class="slide-title">{{titles[i]}}</h3>
+        <p class="slide-description">{{descriptions[i]}}</p>
+      </div>
+    </div>
+  </div>
+
+  <button class="nav-btn prev-btn" (click)="prevSlide()">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+    </svg>
+  </button>
+
+  <button class="nav-btn next-btn" (click)="nextSlide()">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+    </svg>
+  </button>
+
+  <div class="indicators">
+    <div *ngFor="let image of images; let i = index"
+         class="indicator"
+         [class.active]="i === currentIndex"
+         (click)="goToSlide(i)">
+      <div class="indicator-progress" *ngIf="i === currentIndex && isAutoPlaying"></div>
+    </div>
+  </div>
+</div>

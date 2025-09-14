@@ -1,0 +1,28 @@
+<!-- popup-modal.component.html -->
+<div
+  class="popup-modal"
+  [class.open]="isOpen"
+  [class.mask-bg]="backgroundType === 'mask'"
+  [class.transparent-bg]="backgroundType === 'transparent'"
+  (click)="onBackdropClick($event)">
+
+  <div
+    #modalContent
+    class="modal-content"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-hidden]="!isOpen">
+
+    <!-- 关闭按钮 -->
+    <button
+      *ngIf="showCloseButton"
+      class="close-button"
+      aria-label="关闭弹出框"
+      (click)="closeModal()">
+      &times;
+    </button>
+
+    <!-- 内容投影区 -->
+    <ng-content></ng-content>
+  </div>
+</div>

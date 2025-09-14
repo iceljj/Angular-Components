@@ -1,0 +1,87 @@
+/* 瀑布流容器 */
+.waterfall-container {
+  display: flex;
+  gap: 16px; // 列间距
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+
+  /* 列样式 */
+  .column {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr; // 单列布局
+    gap: 16px; // 卡片间距
+    min-width: 0; // 防止内容溢出
+  }
+
+  /* 卡片基础样式 */
+  .card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  /* 卡片图片样式 */
+  .card-image {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+
+      .card:hover & {
+        transform: scale(1.03);
+      }
+    }
+  }
+
+  /* 卡片内容样式 */
+  .card-content {
+    padding: 20px;
+  }
+
+  .card-title {
+    margin: 0 0 12px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .card-text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #666;
+  }
+
+  /* 卡片尺寸样式 */
+  .card-1 { grid-column: span 1; }
+  .card-2 { grid-column: span 2; }
+  .card-3 { grid-column: span 3; }
+
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    flex-direction: column; // 移动端切换为单列
+
+    .column {
+      grid-template-columns: 1fr; // 单列布局
+
+      // 移动端所有卡片占满宽度
+      .card {
+        grid-column: span 1 !important;
+      }
+    }
+  }
+}

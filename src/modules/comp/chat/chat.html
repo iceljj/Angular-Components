@@ -1,0 +1,65 @@
+<div class="chat-container">
+  <!-- 顶部标题 -->
+  <div class="chat-header">
+    <div class="header-text">{{ headerText }}</div>
+  </div>
+
+  <!-- 消息区域 - 添加滚动事件监听和容器引用 -->
+  <div class="messages-container"
+       #messageContainer
+       (scroll)="onMessagesScroll()">
+    <div *ngFor="let msg of messages"
+         [class]="msg.isMe ? 'message-right' : 'message-left'">
+
+      <!-- 左侧消息布局 -->
+      <ng-container *ngIf="!msg.isMe">
+        <div class="avatar-container">
+          <ng-container *ngIf="showAvatar; else textAvatar">
+            <div class="avatar" *ngIf="msg.avatar; else defaultAvatar">
+              {{ msg.avatar }}
+            </div>
+            <ng-template #defaultAvatar>
+              <div class="avatar">客服</div>
+            </ng-template>
+          </ng-container>
+          <ng-template #textAvatar>
+            <div class="avatar-text">客服</div>
+          </ng-template>
+        </div>
+
+        <div class="message-content">
+          <div class="bubble left-bubble">
+            <div class="message-text">{{ msg.content }}</div>
+          </div>
+          <div class="time">{{ formatTime(msg.time) }}</div>
+        </div>
+      </ng-container>
+
+      <!-- 右侧消息布局 -->
+      <ng-container *ngIf="msg.isMe">
+        <div class="message-content">
+          <div class="bubble right-bubble">
+            <div class="message-text">{{ msg.content }}</div>
+          </div>
+          <div class="time">{{ formatTime(msg.time) }}</div>
+        </div>
+
+        <div class="avatar-container">
+          <div class="avatar" *ngIf="showAvatar">{{ "我" }}</div>
+          <div class="avatar-text" *ngIf="!showAvatar">我</div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- 输入区域 -->
+  <div class="input-container">
+    <textarea
+      #messageInput
+      [(ngModel)]="newMessage"
+      placeholder="输入消息..."
+      (keydown.enter)="handleEnter($event)"
+      rows="1"></textarea>
+    <button (click)="sendMessage()">发送</button>
+  </div>
+</div>

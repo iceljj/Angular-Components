@@ -1,0 +1,104 @@
+<!-- excel-grid.component.html -->
+<div class="excel-grid-container">
+  <div class="toolbar">
+    <h1>网页版Excel编辑器</h1>
+    
+    <div class="toolbar-group">
+      <h3>数据操作</h3>
+      <button (click)="addRow()" class="btn btn-primary">添加行</button>
+      <button (click)="deleteSelectedRows()" class="btn btn-danger">删除选中行</button>
+      <button (click)="addColumn()" class="btn btn-primary">添加列</button>
+      <button (click)="deleteSelectedColumn()" class="btn btn-danger">删除选中列</button>
+      <button (click)="clearGrid()" class="btn btn-warning">清空表格</button>
+    </div>
+
+    <div class="toolbar-group">
+      <h3>导入导出</h3>
+      <label class="btn btn-success file-upload">
+        导入文件
+        <input type="file" accept=".csv,.xlsx,.xls" (change)="importFile($event)" hidden>
+      </label>
+      <div class="export-options">
+        <select [(ngModel)]="exportFileType" class="form-control">
+          <option value="excel">Excel (.xlsx)</option>
+          <option value="csv">CSV (.csv)</option>
+        </select>
+        <input type="text" [(ngModel)]="exportFileName" placeholder="文件名" class="form-control">
+        <button (click)="exportData()" class="btn btn-success">导出</button>
+      </div>
+    </div>
+
+    <div class="toolbar-group">
+      <h3>视图调整</h3>
+      <div class="pin-columns">
+        <label for="pinCount">冻结列数:</label>
+        <input 
+          id="pinCount" 
+          type="number" 
+          min="0" 
+          max="10" 
+          [(ngModel)]="pinnedColumnsCount" 
+          class="form-control"
+        >
+        <button (click)="pinColumns()" class="btn btn-info">应用冻结</button>
+        <button (click)="resetPin()" class="btn btn-secondary">重置冻结</button>
+      </div>
+      
+      <div class="header-height">
+        <label for="headerHeight">表头高度:</label>
+        <input 
+          id="headerHeight" 
+          type="number" 
+          min="20" 
+          max="100" 
+          [(ngModel)]="headerHeight" 
+          (change)="updateHeaderHeight()" 
+          class="form-control"
+        >
+      </div>
+    </div>
+
+    <div class="toolbar-group">
+      <h3>选择操作</h3>
+      <button (click)="selectAll()" class="btn btn-secondary">全选</button>
+      <button (click)="deselectAll()" class="btn btn-secondary">取消选择</button>
+      <button (click)="showSelectedRange()" class="btn btn-info">显示选中范围</button>
+    </div>
+  </div>
+
+  <!-- AG Grid 组件 -->
+  <div class="grid-container">
+    <ag-grid-angular
+      #agGrid
+      style="width: 100%; height: 70vh;"
+      class="ag-theme-quartz"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef"
+      [gridOptions]="gridOptions"
+      [getContextMenuItems]="getContextMenuItems"
+      (gridReady)="onGridReady($event)"
+      (cellValueChanged)="onCellValueChanged($event)"
+    ></ag-grid-angular>
+  </div>
+
+  <!-- 状态栏 -->
+  <div class="status-bar">
+    <span>行数: {{ rowData.length }}</span>
+    <span>列数: {{ columnDefs.length }}</span>
+    <span *ngIf="selectedCells.length > 0">选中范围: {{ selectedCells[0].startRow.rowIndex + 1 }},{{ fromCharCode(65 + selectedCells[0].startColumn.colId.charCodeAt(0) - 65) }} 到 {{ selectedCells[0].endRow.rowIndex + 1 }},{{ fromCharCode(65 + selectedCells[0].endColumn.colId.charCodeAt(0) - 65) }}</span>
+  </div>
+
+  <!-- 帮助提示 -->
+  <div class="help-tips">
+    <h4>操作提示:</h4>
+    <ul>
+      <li>点击单元格直接编辑内容</li>
+      <li>拖动列标题调整列宽或列顺序</li>
+      <li>使用表头的筛选和排序功能</li>
+      <li>右键点击打开上下文菜单</li>
+      <li>支持批量选择和复制粘贴操作</li>
+      <li>CSV文件导入支持自动识别列</li>
+    </ul>
+  </div>
+</div>

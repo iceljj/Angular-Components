@@ -1,0 +1,277 @@
+// ====================
+// Markdown 编辑器变量定义
+// ====================
+
+// 基础设计变量
+$font-size: 16px;
+$font-size-sm: 14px;
+$font-size-lg: 18px;
+$font-size-xl: 20px;
+$font-size-xxl: 24px;
+
+$line-height: 1.6;
+$line-height-lg: 1.8;
+
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 16px;
+$spacing-xl: 24px;
+$spacing-xxl: 32px;
+
+$radius-sm: 4px;
+$radius-md: 6px;
+$radius-lg: 8px;
+$radius-xl: 12px;
+
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.15);
+$shadow-xl: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+// 浅色主题变量
+$color-primary-light: #0366d6;
+$color-primary-hover-light: #0256b3;
+$color-primary-active-light: #01468c;
+
+$color-secondary-light: #586069;
+$color-secondary-hover-light: #444d56;
+$color-secondary-active-light: #2f363d;
+
+$color-white-light: #ffffff;
+$color-gray-50-light: #fafbfc;
+$color-gray-100-light: #f6f8fa;
+$color-gray-200-light: #e1e4e8;
+$color-gray-300-light: #d1d5da;
+$color-gray-400-light: #959da5;
+$color-gray-500-light: #6a737d;
+$color-gray-600-light: #586069;
+$color-gray-700-light: #444d56;
+$color-gray-800-light: #2f363d;
+$color-gray-900-light: #24292e;
+$color-black-light: #000000;
+
+$color-success-light: #28a745;
+$color-warning-light: #ffc107;
+$color-error-light: #dc3545;
+$color-info-light: #17a2b8;
+
+$bg-primary-light: $color-white-light;
+$bg-secondary-light: $color-gray-100-light;
+$bg-tertiary-light: $color-gray-50-light;
+
+$text-primary-light: $color-gray-900-light;
+$text-secondary-light: $color-gray-600-light;
+$text-tertiary-light: $color-gray-400-light;
+
+$border-color-light: $color-gray-200-light;
+$border-color-hover-light: $color-gray-300-light;
+
+$toolbar-bg-light: $color-gray-50-light;
+$editor-bg-light: $color-white-light;
+$preview-bg-light: $color-white-light;
+// 代码块背景色 - 浅色主题 (比主背景稍暗)
+$code-block-bg-light: $color-gray-100-light;
+
+// 深色主题变量
+$color-primary-dark: #58a6ff;
+$color-primary-hover-dark: #79b8ff;
+$color-primary-active-dark: #a8d4ff;
+
+$color-secondary-dark: #8b949e;
+$color-secondary-hover-dark: #a5acb5;
+$color-secondary-active-dark: #c9d1d9;
+
+$color-white-dark: #ffffff;
+$color-gray-50-dark: #f0f6fc;
+$color-gray-100-dark: #c9d1d9;
+$color-gray-200-dark: #b1bac4;
+$color-gray-300-dark: #8b949e;
+$color-gray-400-dark: #6e7681;
+$color-gray-500-dark: #484f58;
+$color-gray-600-dark: #30363d;
+$color-gray-700-dark: #21262d;
+$color-gray-800-dark: #161b22;
+$color-gray-900-dark: #0d1117;
+$color-black-dark: #000000;
+
+$color-success-dark: #3fb950;
+$color-warning-dark: #d29922;
+$color-error-dark: #f85149;
+$color-info-dark: #2eaadc;
+
+$bg-primary-dark: $color-gray-900-dark;
+$bg-secondary-dark: $color-gray-800-dark;
+$bg-tertiary-dark: $color-gray-700-dark;
+
+$text-primary-dark: $color-gray-100-dark;
+$text-secondary-dark: $color-gray-300-dark;
+$text-tertiary-dark: $color-gray-400-dark;
+
+$border-color-dark: $color-gray-600-dark;
+$border-color-hover-dark: $color-gray-500-dark;
+
+$toolbar-bg-dark: $color-gray-800-dark;
+$editor-bg-dark: $color-gray-900-dark;
+$preview-bg-dark: $color-gray-900-dark;
+// 代码块背景色 - 深色主题 (比主背景稍亮)
+$code-block-bg-dark: $color-gray-800-dark;
+
+// CSS变量定义 - 浅色主题 (默认主题)
+
+.markdown-editor,
+.markdown-editor-wrapper {
+  // 颜色变量
+  --color-primary: #{$color-primary-light};
+  --color-primary-hover: #{$color-primary-hover-light};
+  --color-primary-active: #{$color-primary-active-light};
+
+  --color-secondary: #{$color-secondary-light};
+  --color-secondary-hover: #{$color-secondary-hover-light};
+  --color-secondary-active: #{$color-secondary-active-light};
+
+  --color-white: #{$color-white-light};
+  --color-gray-50: #{$color-gray-50-light};
+  --color-gray-100: #{$color-gray-100-light};
+  --color-gray-200: #{$color-gray-200-light};
+  --color-gray-300: #{$color-gray-300-light};
+  --color-gray-400: #{$color-gray-400-light};
+  --color-gray-500: #{$color-gray-500-light};
+  --color-gray-600: #{$color-gray-600-light};
+  --color-gray-700: #{$color-gray-700-light};
+  --color-gray-800: #{$color-gray-800-light};
+  --color-gray-900: #{$color-gray-900-light};
+  --color-black: #{$color-black-light};
+
+  --color-success: #{$color-success-light};
+  --color-warning: #{$color-warning-light};
+  --color-error: #{$color-error-light};
+  --color-info: #{$color-info-light};
+
+  // 错误状态相关变量
+  --bg-error: #ffeaea;
+  --border-error: #ff6b6b;
+  --text-error: #d63031;
+  
+  // 成功状态相关变量
+  --bg-success: #e8f5e8;
+  --border-success: #4caf50;
+  --text-success: #2e7d32;
+
+  // 背景颜色
+  --bg-primary: #{$bg-primary-light};
+  --bg-secondary: #{$bg-secondary-light};
+  --bg-tertiary: #{$bg-tertiary-light};
+
+  // 文本颜色
+  --text-primary: #{$text-primary-light};
+  --text-secondary: #{$text-secondary-light};
+  --text-tertiary: #{$text-tertiary-light};
+
+  // 边框颜色
+  --border-color: #{$border-color-light};
+  --border-color-hover: #{$border-color-hover-light};
+
+  // 组件特定颜色
+  --toolbar-bg: #{$toolbar-bg-light};
+  --editor-bg: #{$editor-bg-light};
+  --preview-bg: #{$preview-bg-light};
+  --code-block-bg: #{$code-block-bg-light};
+  --primary-color: #{$color-primary-light};
+
+  // 其他变量
+  --font-size: #{$font-size};
+  --font-size-sm: #{$font-size-sm};
+  --font-size-lg: #{$font-size-lg};
+  --font-size-xl: #{$font-size-xl};
+  --font-size-xxl: #{$font-size-xxl};
+  --font-size-xs: 12px; // 超小字体
+  --mono-font: 'Fira Code', 'Monaco', 'Consolas', 'Liberation Mono', 'Menlo', monospace; // 等宽字体
+
+  --line-height: #{$line-height};
+  --line-height-lg: #{$line-height-lg};
+
+  --spacing-xs: #{$spacing-xs};
+  --spacing-sm: #{$spacing-sm};
+  --spacing-md: #{$spacing-md};
+  --spacing-lg: #{$spacing-lg};
+  --spacing-xl: #{$spacing-xl};
+  --spacing-xxl: #{$spacing-xxl};
+
+  --radius-sm: #{$radius-sm};
+  --radius-md: #{$radius-md};
+  --radius-lg: #{$radius-lg};
+  --radius-xl: #{$radius-xl};
+  --radius: #{$radius-md}; // 默认圆角大小
+
+  --shadow-sm: #{$shadow-sm};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+  --shadow-xl: #{$shadow-xl};
+}
+
+.markdown-editor.dark-theme,
+.markdown-editor-wrapper.dark-theme {
+  --color-primary: #{$color-primary-dark};
+  --color-primary-hover: #{$color-primary-hover-dark};
+  --color-primary-active: #{$color-primary-active-dark};
+
+  --color-secondary: #{$color-secondary-dark};
+  --color-secondary-hover: #{$color-secondary-hover-dark};
+  --color-secondary-active: #{$color-secondary-active-dark};
+
+  --color-white: #{$color-white-dark};
+  --color-gray-50: #{$color-gray-50-dark};
+  --color-gray-100: #{$color-gray-100-dark};
+  --color-gray-200: #{$color-gray-200-dark};
+  --color-gray-300: #{$color-gray-300-dark};
+  --color-gray-400: #{$color-gray-400-dark};
+  --color-gray-500: #{$color-gray-500-dark};
+  --color-gray-600: #{$color-gray-600-dark};
+  --color-gray-700: #{$color-gray-700-dark};
+  --color-gray-800: #{$color-gray-800-dark};
+  --color-gray-900: #{$color-gray-900-dark};
+  --color-black: #{$color-black-dark};
+
+  --color-success: #{$color-success-dark};
+  --color-warning: #{$color-warning-dark};
+  --color-error: #{$color-error-dark};
+  --color-info: #{$color-info-dark};
+
+  // 错误状态相关变量 - 深色主题
+  --bg-error: #4a1f1f;
+  --border-error: #8b2635;
+  --text-error: #ff7979;
+  
+  // 成功状态相关变量 - 深色主题
+  --bg-success: #1a3d1a;
+  --border-success: #4caf50;
+  --text-success: #81c784;
+
+  --bg-primary: #{$bg-primary-dark};
+  --bg-secondary: #{$bg-secondary-dark};
+  --bg-tertiary: #{$bg-tertiary-dark};
+
+  --text-primary: #{$text-primary-dark};
+  --text-secondary: #{$text-secondary-dark};
+  --text-tertiary: #{$text-tertiary-dark};
+
+  --border-color: #{$border-color-dark};
+  --border-color-hover: #{$border-color-hover-dark};
+  // 组件特定颜色
+  --toolbar-bg: #{$toolbar-bg-dark};
+  --editor-bg: #{$editor-bg-dark};
+  --preview-bg: #{$preview-bg-dark};
+  --code-block-bg: #{$code-block-bg-dark};
+  --primary-color: #{$color-primary-dark};
+}
+
+html,
+body {
+  --bg-primary: #{$bg-primary-light};
+}
+
+html.dark-theme,
+body.dark-theme {
+  --bg-primary: #{$bg-primary-dark};
+}

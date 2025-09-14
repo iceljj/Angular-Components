@@ -1,0 +1,67 @@
+// 消息组件容器样式
+.message-demo {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  background-color: #fafafa;
+
+  h3 {
+    margin-top: 0;
+    color: #333;
+  }
+
+  .button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    button {
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+// 自定义消息模板样式
+.custom-message {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 4px;
+  background-color: #f6ffed;
+  border: 1px solid #b7eb8f;
+  color: #52c41a;
+
+  .message-icon {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>');
+  }
+
+  span {
+    font-size: 14px;
+  }
+}
+
+// 不同类型消息的样式
+.nz-message-success {
+  background-color: #f6ffed;
+  border-color: #b7eb8f;
+}
+
+.nz-message-warning {
+  background-color: #fffbe6;
+  border-color: #ffe58f;
+}
+
+.nz-message-error {
+  background-color: #fff2f0;
+  border-color: #ffccc7;
+}
+
+.nz-message-info {
+  background-color: #e6f7ff;
+  border-color: #91d5ff;
+}

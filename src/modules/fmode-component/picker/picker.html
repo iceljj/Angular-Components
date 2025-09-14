@@ -1,0 +1,79 @@
+<div class="address-selector" id="open-modal">
+  <div class="address-display">
+    <span class="placeholder" *ngIf="!selectedProvince && !selectedCity && !selectedDistrict">请选择地址</span>
+    <span class="selected-address" *ngIf="selectedProvince || selectedCity || selectedDistrict">
+      <span class="province">{{ selectedProvince || '' }}</span>
+      <span class="divider" *ngIf="selectedProvince && (selectedCity || selectedDistrict)">/</span>
+      <span class="city">{{ selectedCity || '' }}</span>
+      <span class="divider" *ngIf="selectedCity && selectedDistrict">/</span>
+      <span class="district">{{ selectedDistrict || '' }}</span>
+    </span>
+  </div>
+  <ion-icon name="chevron-down-outline" class="dropdown-icon"></ion-icon>
+</div>
+
+<ion-modal #addressModal trigger="open-modal" (didDismiss)="onDidDismiss($event)" class="address-modal">
+  <ng-template>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="addressModal.dismiss(null, 'cancel')" color="medium">取消</ion-button>
+      </ion-buttons>
+      <ion-title>选择地址</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="confirmSelection()" color="primary">确定</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+
+    <div class="picker-header">
+      <div class="header-item" [class.active]="currentColumn === 'province'">
+        <span>{{ selectedProvince || '选择省份' }}</span>
+      </div>
+      <div class="header-item" [class.active]="currentColumn === 'city'" *ngIf="selectedProvince">
+        <span>{{ selectedCity || '选择城市' }}</span>
+      </div>
+      <div class="header-item" [class.active]="currentColumn === 'district'" *ngIf="selectedCity">
+        <span>{{ selectedDistrict || '选择区县' }}</span>
+      </div>
+    </div>
+
+    <div class="picker-container">
+      <ion-picker>
+        <ion-picker-column
+          [value]="selectedProvince"
+          (ionChange)="onProvinceChange($event)"
+          (ionColChange)="onColumnFocus('province')"
+          #provinceColumn>
+          <ion-picker-column-option
+            *ngFor="let province of provinces"
+            [value]="province">
+            {{ province }}
+          </ion-picker-column-option>
+        </ion-picker-column>
+
+        <ion-picker-column
+          [value]="selectedCity"
+          (ionChange)="onCityChange($event)"
+          (ionColChange)="onColumnFocus('city')"
+          #cityColumn>
+          <ion-picker-column-option
+            *ngFor="let city of cities"
+            [value]="city">
+            {{ city }}
+          </ion-picker-column-option>
+        </ion-picker-column>
+
+        <ion-picker-column
+          [value]="selectedDistrict"
+          (ionChange)="onDistrictChange($event)"
+          (ionColChange)="onColumnFocus('district')"
+          #districtColumn>
+          <ion-picker-column-option
+            *ngFor="let district of districts"
+            [value]="district">
+            {{ district }}
+          </ion-picker-column-option>
+        </ion-picker-column>
+      </ion-picker>
+    </div>
+  </ng-template>
+</ion-modal>

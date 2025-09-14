@@ -1,0 +1,9 @@
+<button
+  class="fancy-button"
+  [class.hover]="isHovered"
+  [class.pressed]="isPressed"
+  [class.context-menu-open]="isContextMenuOpen"
+  (contextmenu)="onContextMenu($event)"
+>
+  Click Me
+</button>

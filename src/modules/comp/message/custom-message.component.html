@@ -1,0 +1,37 @@
+<!-- 普通消息展示区域 -->
+<div class="message-demo">
+    <h3>普通消息模式</h3>
+    <div class="button-group">
+        <button nz-button nzType="primary" (click)="showMessage('info', '这是一条普通消息')">显示普通消息</button>
+        <button nz-button nzType="primary" (click)="showMessage('success', '这是一条成功消息')">显示成功消息</button>
+        <button nz-button nzType="primary" (click)="showMessage('warning', '这是一条警告消息')">显示警告消息</button>
+        <button nz-button nzType="primary" (click)="showMessage('error', '这是一条错误消息')">显示错误消息</button>
+    </div>
+</div>
+
+<!-- 自定义模板消息展示区域 -->
+<div class="message-demo">
+    <h3>自定义模板模式</h3>
+    <div class="button-group">
+        <button nz-button nzType="primary" (click)="showTemplateMessage('Angular')">显示自定义模板消息</button>
+        <button nz-button nzType="primary" (click)="showTemplateMessageByType('success', 'Angular成功')">
+            显示自定义成功消息
+        </button>
+        <button nz-button nzType="primary" (click)="showTemplateMessageByType('warning', 'Angular警告')">
+            显示自定义警告消息
+        </button>
+        <button nz-button nzType="primary" (click)="showTemplateMessageByType('error', 'Angular错误')">
+            显示自定义错误消息
+        </button>
+    </div>
+</div>
+
+<!-- 自定义模板定义 -->
+<ng-template #customTemplate let-data>
+    <div class="custom-message">
+        <i class="message-icon"></i>
+        <span>自定义模板消息: {{ data }}</span>
+    </div>
+    <br>
+    <i>家咯</i>
+</ng-template>
