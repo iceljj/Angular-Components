@@ -22,8 +22,11 @@
           // 确保路径以 baseHref 开头
           var basePath = '/Angular-Components';
           var finalPath = redirectPath;
-          if (!redirectPath.startsWith(basePath)) {
-            finalPath = basePath + (redirectPath.startsWith('/') ? redirectPath : '/' + redirectPath);
+          if (!redirectPath.startsWith('/')) {
+            finalPath = '/' + redirectPath;
+          }
+          if (!finalPath.startsWith(basePath)) {
+            finalPath = basePath + finalPath;
           }
           history.replaceState(null, null, finalPath);
         } else {
