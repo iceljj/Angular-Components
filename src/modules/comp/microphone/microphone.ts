@@ -153,17 +153,19 @@ export class Microphone implements OnInit, OnDestroy {
     const draw = () => {
       this.animationFrameId = requestAnimationFrame(draw);
 
-      this.analyser!.getByteFrequencyData(this.dataArray!);
+      // 创建一个新的 Uint8Array 来避免类型冲突
+      const tempArray = new Uint8Array(this.analyser!.frequencyBinCount);
+      this.analyser!.getByteFrequencyData(tempArray);
 
       canvasCtx.fillStyle = 'rgba(0, 0, 0, 0.1)';
       canvasCtx.fillRect(0, 0, width, height);
 
-      const barWidth = (width / this.dataArray!.length) * 2.5;
+      const barWidth = (width / tempArray.length) * 2.5;
       let barHeight;
       let x = 0;
 
-      for (let i = 0; i < this.dataArray!.length; i++) {
-        barHeight = this.dataArray![i] / 2;
+      for (let i = 0; i < tempArray.length; i++) {
+        barHeight = tempArray[i] / 2;
 
         canvasCtx.fillStyle = `rgb(${barHeight + 100}, 50, 150)`;
         canvasCtx.fillRect(x, height - barHeight, barWidth, barHeight);
